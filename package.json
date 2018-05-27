@@ -13,6 +13,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test-ci": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "prettier": "prettier --single-quote --tab-width 4 --print-width 100 --write \"src/**/*.{jsx,js}\"",
     "lint": "eslint src/**/*.{jsx,js}",
