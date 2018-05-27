@@ -1,0 +1,36 @@
+{
+  "name": "truth-or-dare",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^1.1.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "prettier": "prettier --single-quote --tab-width 4 --print-width 100 --write \"src/**/*.{jsx,js}\"",
+    "lint": "eslint src/**/*.{jsx,js}",
+    "lint-fix": "eslint --fix src/**/*.{jsx,js}",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{jsx,js}": [
+      "prettier --single-quote --tab-width 4 --print-width 100 --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.8.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.1.2",
+    "prettier": "^1.12.1"
+  }
+}
