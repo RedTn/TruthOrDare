@@ -1,51 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-
-const styles = {
-    card: {
-        minWidth: 275
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)'
-    },
-    title: {
-        marginBottom: 16,
-        fontSize: 14
-    },
-    pos: {
-        marginBottom: 12
-    }
-};
+import './QuestionCard.css';
+import { IconButton, Typography, Card, CardActions, CardContent } from '@material-ui/core';
+import { Flip } from '@material-ui/icons';
 
 const QuestionCard = props => {
-    const { classes } = props;
+    const DirectionCard = props => {
+        const { question, type, flip } = props;
+
+        DirectionCard.propTypes = {
+            flip: PropTypes.bool
+        };
+
+        return (
+            <Card className={(flip ? 'flip-content-upside-down' : '').concat(' question-card')}>
+                <CardContent>
+                    <Typography variant="display3" component="h1">
+                        {type === 'truth' ? 'Truth' : 'Dare'}
+                    </Typography>
+                    <Typography variant="display1" component="p">
+                        {type === 'truth' ? question.truth : question.dare}
+                    </Typography>
+                    <CardActions>
+                        <IconButton size="large" color="primary">
+                            <Flip />
+                        </IconButton>
+                    </CardActions>
+                </CardContent>
+            </Card>
+        );
+    };
 
     return (
-        <div className="questionCard">
-            <Card className={classes.card}>
-                <CardContent>
-                    <Typography variant="headline" component="h2">
-                        Test
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </Card>
+        <div>
+            <DirectionCard {...props} flip={true} />
+            <DirectionCard {...props} />
         </div>
     );
 };
 
 QuestionCard.propTypes = {
-    classes: PropTypes.object.isRequired
+    question: PropTypes.object.isRequired,
+    type: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(QuestionCard);
+export default QuestionCard;
