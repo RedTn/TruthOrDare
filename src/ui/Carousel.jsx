@@ -17,14 +17,16 @@ const Carousel = () => {
         dare: 'test2'
     };
     return (
-        <Slider {...settings} className="question-carousel">
-            <div>
-                <QuestionCard question={question} type="truth" />
-            </div>
-            <div>
-                <QuestionCard question={question} type="truth" />
-            </div>
-        </Slider>
+        <div>
+            <Slider {...settings} className="question-carousel">
+                <div>
+                    <QuestionCard question={question} type="truth" />
+                </div>
+                <div>
+                    <QuestionCard question={question} type="truth" />
+                </div>
+            </Slider>
+        </div>
     );
 };
 
