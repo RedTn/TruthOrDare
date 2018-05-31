@@ -1,2 +1,11 @@
 .hide-button {
   display: none; }
+
+.menu-button {
+  margin: 5px 5px 5px 5px; }
+
+.menu-item {
+  margin-right: 10px; }
+
+.menu-item-2 {
+  margin-right: 30px; }

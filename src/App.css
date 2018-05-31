@@ -2,7 +2,7 @@
 @import url(~slick-carousel/slick/slick-theme.css);
 .slick-prev:before,
 .slick-next:before {
-  color: blue; }
+  color: red; }
 
 .flip-content-upside-down {
   -webkit-transform: rotate(-180deg);
