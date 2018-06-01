@@ -11,10 +11,10 @@ class DirectionCard extends Component {
         return (
             <Card className={(flip ? 'flip-content-upside-down' : '').concat(' question-card')}>
                 <CardContent>
-                    <Typography variant="display3" component="h1">
+                    <Typography variant="display1" component="h1">
                         {isTruth ? 'Truth' : 'Dare'}
                     </Typography>
-                    <Typography variant="display1" component="p">
+                    <Typography variant="body2" component="p">
                         {isTruth ? question.truth : question.dare}
                     </Typography>
                     <CardActions>

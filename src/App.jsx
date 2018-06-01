@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
-import Carousel from './container/Carousel';
 import Menu from './container/Menu';
+import Home from './routes/Home';
+import AddQuestions from './routes/AddQuestions';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { red, orange } from '@material-ui/core/colors';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 const theme = createMuiTheme({
     palette: {
@@ -16,8 +18,13 @@ const App = () => {
     return (
         <div className="App">
             <MuiThemeProvider theme={theme}>
-                <Menu />
-                <Carousel />
+                <BrowserRouter>
+                    <div>
+                        <Menu />
+                        <Route exact path="/" component={Home} />
+                        <Route path="/add-questions" component={AddQuestions} />
+                    </div>
+                </BrowserRouter>
             </MuiThemeProvider>
         </div>
     );

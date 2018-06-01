@@ -9,3 +9,16 @@
 
 .menu-item-2 {
   margin-right: 30px; }
+
+.menu-ul {
+  list-style-type: none;
+  padding-left: 0px; }
+
+.menu-item-home {
+  margin-right: 75px; }
+
+.menu-item-add {
+  margin-right: 40px; }
+
+.menu-item-clear {
+  margin-right: 20px; }
