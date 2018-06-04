@@ -1,17 +1,30 @@
 import C from '../constants';
 import { combineReducers } from 'redux';
 
-export const questions = (state = [], action) => {
+export const truths = (state = [], action) => {
     switch (action.type) {
-    case C.IMPORT_QUESTIONS:
-        return action.payload;
-    case C.ADD_QUESTION:
+    case C.ADD_TRUTH:
         return [...state, action.payload];
-    case C.DELETE_QUESTION:
-        return state.filter(q => {
-            return q.id !== action.payload.id;
-        });
-    case C.CLEAR_QUESTIONS:
+    case C.IMPORT_TRUTHS:
+        return action.payload;
+    case C.DELETE_TRUTH:
+        return state.filter(t => t.id !== action.payload.id);
+    case C.CLEAR_TRUTHS:
+        return [];
+    default:
+        return state;
+    }
+};
+
+export const dares = (state = [], action) => {
+    switch (action.type) {
+    case C.ADD_DARE:
+        return [...state, action.payload];
+    case C.IMPORT_DARES:
+        return action.payload;
+    case C.DELETE_DARE:
+        return state.filter(d => d.id !== action.payload.id);
+    case C.CLEAR_DARES:
         return [];
     default:
         return state;
@@ -19,5 +32,8 @@ export const questions = (state = [], action) => {
 };
 
 export default combineReducers({
-    questions
+    questions: combineReducers({
+        truths,
+        dares
+    })
 });

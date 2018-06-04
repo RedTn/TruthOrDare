@@ -1,6 +1,6 @@
 import Menu from '../ui/Menu';
 import { connect } from 'react-redux';
-import { importQuestions, clearQuestions } from '../store/actions';
+import { importTruths, importDares, clearTruths, clearDares } from '../store/actions';
 
 const mapStateToProps = state => {
     return {
@@ -11,10 +11,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         handleFileUpload(data) {
-            dispatch(importQuestions(data));
+            const { truths = [], dares = [] } = data;
+            dispatch(importTruths(truths));
+            dispatch(importDares(dares));
         },
         clearQuestions() {
-            dispatch(clearQuestions());
+            dispatch(clearTruths());
+            dispatch(clearDares());
         }
     };
 };

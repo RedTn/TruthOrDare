@@ -1,6 +1,6 @@
 import AddQuestionsForm from '../ui/AddQuestionsForm';
 import { connect } from 'react-redux';
-import { addQuestion, deleteQuestion } from '../store/actions';
+import { addTruth, addDare, deleteTruth, deleteDare } from '../store/actions';
 
 const mapStateToProps = state => {
     return {
@@ -10,11 +10,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addQuestion(data) {
-            dispatch(addQuestion(data));
+        addTruth(data) {
+            dispatch(addTruth(data));
         },
-        deleteQuestion(data) {
-            dispatch(deleteQuestion(data));
+        addDare(data) {
+            dispatch(addDare(data));
+        },
+        deleteTruth(data) {
+            dispatch(deleteTruth(data));
+        },
+        deleteDare(data) {
+            dispatch(deleteDare(data));
         }
     };
 };

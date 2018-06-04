@@ -7,10 +7,49 @@ import {
     ExpansionPanelSummary,
     ExpansionPanelDetails,
     Typography,
-    Divider
+    Divider,
+    Grid
 } from '@material-ui/core';
 import { ExpandMore, Delete } from '@material-ui/icons';
 import './AddQuestionsForm.css';
+
+const GridItem = ({ values, label, onClick }) => (
+    <Grid item xs={6}>
+        <div className="values-list">
+            {values.map((value, i) => {
+                return (
+                    <div key={i}>
+                        <Button
+                            variant="fab"
+                            color="primary"
+                            className="delete-button"
+                            onClick={() => onClick(value)}
+                        >
+                            <Delete />
+                        </Button>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+                                <Typography>
+                                    {label} {i}
+                                </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Typography>{value.value}</Typography>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <Divider />
+                    </div>
+                );
+            })}
+        </div>
+    </Grid>
+);
+
+GridItem.propTypes = {
+    values: PropTypes.array,
+    label: PropTypes.string,
+    onClick: PropTypes.func
+};
 
 class AddQuestionsForm extends Component {
     constructor() {
@@ -23,7 +62,8 @@ class AddQuestionsForm extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.deleteQuestion = this.deleteQuestion.bind(this);
+        this.deleteTruth = this.deleteTruth.bind(this);
+        this.deleteDare = this.deleteDare.bind(this);
     }
 
     handleChange = name => event => {
@@ -33,7 +73,10 @@ class AddQuestionsForm extends Component {
     };
 
     handleSubmit(e) {
-        this.props.addQuestion(this.state);
+        if (this.state.truth && typeof this.state.truth === 'string')
+            this.props.addTruth(this.state.truth);
+        if (this.state.dare && typeof this.state.dare === 'string')
+            this.props.addDare(this.state.dare);
         this.setState({
             truth: '',
             dare: ''
@@ -41,85 +84,69 @@ class AddQuestionsForm extends Component {
         e.preventDefault();
     }
 
-    deleteQuestion(question) {
-        this.props.deleteQuestion(question);
+    deleteDare(dare) {
+        this.props.deleteDare(dare);
+    }
+
+    deleteTruth(truth) {
+        this.props.deleteTruth(truth);
     }
 
     render() {
-        const { questions } = this.props;
+        const {
+            questions: { truths = [], dares = [] }
+        } = this.props;
         return (
             <div>
                 <form autoComplete="off" onSubmit={this.handleSubmit}>
                     <div>
-                        <TextField
-                            id="truth"
-                            label="Truth"
-                            value={this.state.truth}
-                            multiline
-                            required
-                            onChange={this.handleChange('truth')}
-                            margin="normal"
-                        />
+                        <span className="question-fields">
+                            <TextField
+                                id="truth"
+                                label="Truth"
+                                value={this.state.truth}
+                                multiline
+                                onChange={this.handleChange('truth')}
+                                margin="normal"
+                            />
+                        </span>
+                        <span className="question-fields">
+                            <TextField
+                                id="dare"
+                                label="Dare"
+                                value={this.state.dare}
+                                multiline
+                                onChange={this.handleChange('dare')}
+                                margin="normal"
+                            />
+                        </span>
                     </div>
-                    <div>
-                        <TextField
-                            id="dare"
-                            label="Dare"
-                            value={this.state.dare}
-                            multiline
-                            required
-                            onChange={this.handleChange('dare')}
-                            margin="normal"
-                        />
-                    </div>
+
                     <div>
                         <Button variant="raised" type="submit">
                             Submit
                         </Button>
                     </div>
                 </form>
-                <div className="questions-list">
-                    {questions.map((question, i) => {
-                        return (
-                            <div key={i}>
-                                <Button
-                                    variant="fab"
-                                    color="primary"
-                                    className="delete-button"
-                                    onClick={() => this.deleteQuestion(question)}
-                                >
-                                    <Delete />
-                                </Button>
-                                <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                                        <Typography>Truth {i}</Typography>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails>
-                                        <Typography>{question.truth}</Typography>
-                                    </ExpansionPanelDetails>
-                                </ExpansionPanel>
-                                <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                                        <Typography>Dare {i}</Typography>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails>
-                                        <Typography>{question.dare}</Typography>
-                                    </ExpansionPanelDetails>
-                                </ExpansionPanel>
-                                <Divider />
-                            </div>
-                        );
-                    })}
-                </div>
+                <Grid container spacing={8}>
+                    <GridItem
+                        values={truths}
+                        label="Truth"
+                        onClick={truth => this.deleteTruth(truth)}
+                    />
+                    <GridItem values={dares} label="Dare" onClick={dare => this.deleteDare(dare)} />
+                </Grid>
             </div>
         );
     }
 }
 
 AddQuestionsForm.propTypes = {
-    questions: PropTypes.array,
-    addQuestion: PropTypes.func,
-    deleteQuestion: PropTypes.func
+    questions: PropTypes.object,
+    addTruth: PropTypes.func,
+    addDare: PropTypes.func,
+    deleteTruth: PropTypes.func,
+    deleteDare: PropTypes.func
 };
 
 export default AddQuestionsForm;

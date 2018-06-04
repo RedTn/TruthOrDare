@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import QuestionCard from './QuestionCard';
+import _ from 'lodash';
 import './Carousel.css';
 
 const Carousel = props => {
-    const { questions = [] } = props;
+    const { questions = {} } = props;
 
     const settings = {
         dots: true,
@@ -15,7 +16,34 @@ const Carousel = props => {
         slidesToScroll: 1
     };
 
-    const questionCards = questions.map((question, i) => {
+    // const temp = {
+    //     truths: [
+    //         {id: '123', value: '345'},
+    //         {id: '456', value: 'sdf'}
+    //     ],
+    //     dares: [
+    //         {id: 'ncv', value: 'asd'},
+    //         {id: 'op[', value: 'ghj'},
+    //         {id: 'asd', value: 'nm,'}
+    //     ]
+    // };
+
+    // const shuffledQuestions = _.mapValues(temp, (q) => _.shuffle(q));
+    // const questions2 = {
+    //     questions : _.zip(shuffledQuestions.truths, shuffledQuestions.dares)
+    //         .map((pair) => _.zipObject(['truth', 'dare'], pair))
+    // };
+
+    _.mixin({ zipChain: arrays => _.zip.apply(_, arrays) });
+
+    const shuffledQuestions = _(questions)
+        .mapValues(q => _.shuffle(q))
+        .values()
+        .zipChain()
+        .map(q => _.zipObject(['truth', 'dare'], q))
+        .value();
+
+    const questionCards = shuffledQuestions.map((question, i) => {
         return (
             <div key={i}>
                 <QuestionCard question={question} />
@@ -37,7 +65,7 @@ const Carousel = props => {
 };
 
 Carousel.propTypes = {
-    questions: PropTypes.array
+    questions: PropTypes.object
 };
 
 export default Carousel;

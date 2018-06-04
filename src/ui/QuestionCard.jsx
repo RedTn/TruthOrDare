@@ -7,6 +7,7 @@ import { Flip } from '@material-ui/icons';
 class DirectionCard extends Component {
     render() {
         const { question, isTruth, flip } = this.props;
+        const { truth = {}, dare = {} } = question;
 
         return (
             <Card className={(flip ? 'flip-content-upside-down' : '').concat(' question-card')}>
@@ -15,7 +16,9 @@ class DirectionCard extends Component {
                         {isTruth ? 'Truth' : 'Dare'}
                     </Typography>
                     <Typography variant="body2" component="p">
-                        {isTruth ? question.truth : question.dare}
+                        {isTruth
+                            ? truth.value || '**THIS CARD HAS NO TRUTH**'
+                            : dare.value || '**THIS CARD HAS NO DARE**'}
                     </Typography>
                     <CardActions>
                         <IconButton size="large" color="primary" onClick={this.props.onFlipToggled}>

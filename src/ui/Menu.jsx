@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Drawer, Button, IconButton, Typography, Toolbar, AppBar } from '@material-ui/core';
+import { Drawer, Button, IconButton, Typography, Toolbar, AppBar, Switch } from '@material-ui/core';
 import {
     CloudUpload,
     Save,
     Menu as MenuIcon,
     VideogameAsset,
     Edit,
-    Delete
+    Delete,
+    Shuffle as ShuffleIcon
 } from '@material-ui/icons';
 import FileSaver from 'file-saver';
 import { Link } from 'react-router-dom';
@@ -24,7 +25,8 @@ class Menu extends Component {
         super();
 
         this.state = {
-            isDrawerOpen: false
+            isDrawerOpen: false,
+            isDual: true
         };
 
         this.setDrawer = this.setDrawer.bind(this);
@@ -46,13 +48,17 @@ class Menu extends Component {
                     const data = JSON.parse(window.atob(e.target.result));
                     this.props.handleFileUpload(data);
                 } catch (e) {
-                    console.error(e);
+                    console.error(e); // eslint-disable-line no-console
                 } finally {
                     this.uploadField.value = null;
                 }
             }
         });
     }
+
+    handleSwitch = name => event => {
+        this.setState({ [name]: event.target.checked });
+    };
 
     saveQuestions() {
         const { questions } = this.props;
@@ -66,6 +72,26 @@ class Menu extends Component {
     }
 
     render() {
+        const {
+            location: { pathname }
+        } = this.props;
+        const HomeWidgets =
+            pathname === '/' ? (
+                <div>
+                    <Button className="shuffle-button">
+                        Shuffle <ShuffleIcon />
+                    </Button>
+                    <span className="dual-switch">
+                        Dual Mode
+                        <Switch
+                            checked={this.state.isDual}
+                            onChange={this.handleSwitch('isDual')}
+                        />
+                    </span>
+                </div>
+            ) : (
+                ''
+            );
         return (
             <div>
                 <AppBar position="static">
@@ -80,6 +106,7 @@ class Menu extends Component {
                         <Typography variant="title" color="inherit">
                             Truth or Dare
                         </Typography>
+                        <div>{HomeWidgets}</div>
                     </Toolbar>
                 </AppBar>
                 <input
@@ -195,9 +222,10 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-    questions: PropTypes.array,
+    questions: PropTypes.object,
     handleFileUpload: PropTypes.func.isRequired,
-    clearQuestions: PropTypes.func
+    clearQuestions: PropTypes.func,
+    location: PropTypes.object
 };
 
 export default Menu;

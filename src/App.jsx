@@ -5,7 +5,7 @@ import Home from './routes/Home';
 import AddQuestions from './routes/AddQuestions';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { red, orange } from '@material-ui/core/colors';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, withRouter } from 'react-router-dom';
 
 const theme = createMuiTheme({
     palette: {
@@ -14,13 +14,15 @@ const theme = createMuiTheme({
     }
 });
 
+const RoutedMenu = withRouter(props => <Menu {...props} />);
+
 const App = () => {
     return (
         <div className="App">
             <MuiThemeProvider theme={theme}>
                 <BrowserRouter>
                     <div>
-                        <Menu />
+                        <RoutedMenu />
                         <Route exact path="/" component={Home} />
                         <Route path="/add-questions" component={AddQuestions} />
                     </div>
