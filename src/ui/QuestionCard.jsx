@@ -16,10 +16,10 @@ class DirectionCard extends Component {
                 )}
             >
                 <CardContent>
-                    <Typography variant="display1" component="h1">
+                    <Typography variant={doubleSided ? 'display1' : 'display4'} component="h1">
                         {isTruth ? 'Truth' : 'Dare'}
                     </Typography>
-                    <Typography variant="subheading" component="p">
+                    <Typography variant={doubleSided ? 'subheading' : 'display2'} component="p">
                         {isTruth
                             ? truth.value || '**THIS CARD HAS NO TRUTH**'
                             : dare.value || '**THIS CARD HAS NO DARE**'}
