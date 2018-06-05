@@ -19,7 +19,7 @@ class DirectionCard extends Component {
                     <Typography variant="display1" component="h1">
                         {isTruth ? 'Truth' : 'Dare'}
                     </Typography>
-                    <Typography variant="body2" component="p">
+                    <Typography variant="subheading" component="p">
                         {isTruth
                             ? truth.value || '**THIS CARD HAS NO TRUTH**'
                             : dare.value || '**THIS CARD HAS NO DARE**'}

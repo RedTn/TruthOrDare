@@ -102,7 +102,7 @@ class Menu extends Component {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="title" color="inherit">
+                        <Typography variant="subheading" color="inherit">
                             Truth or Dare
                         </Typography>
                         <div>{HomeWidgets}</div>
