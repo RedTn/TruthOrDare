@@ -7,8 +7,7 @@ import {
     Menu as MenuIcon,
     VideogameAsset,
     Edit,
-    Delete,
-    Shuffle as ShuffleIcon
+    Delete
 } from '@material-ui/icons';
 import FileSaver from 'file-saver';
 import { Link } from 'react-router-dom';
@@ -81,9 +80,6 @@ class Menu extends Component {
         const HomeWidgets =
             pathname === '/' ? (
                 <div>
-                    <Button className="shuffle-button">
-                        Shuffle <ShuffleIcon />
-                    </Button>
                     <span className="dual-switch">
                         Dual Mode
                         <Switch
