@@ -6,11 +6,15 @@ import { Flip } from '@material-ui/icons';
 
 class DirectionCard extends Component {
     render() {
-        const { question, isTruth, flip } = this.props;
+        const { question, isTruth, flip, doubleSided } = this.props;
         const { truth = {}, dare = {} } = question;
 
         return (
-            <Card className={(flip ? 'flip-content-upside-down' : '').concat(' question-card')}>
+            <Card
+                className={(flip ? 'flip-content-upside-down' : '').concat(
+                    doubleSided ? ' question-card-half' : ' question-card'
+                )}
+            >
                 <CardContent>
                     <Typography variant="display1" component="h1">
                         {isTruth ? 'Truth' : 'Dare'}
@@ -51,14 +55,20 @@ class QuestionCard extends Component {
     }
 
     render() {
+        const { doubleSided } = this.props;
+
         return (
             <div>
-                <DirectionCard
-                    {...this.props}
-                    isTruth={this.state.isTruth}
-                    flip={true}
-                    onFlipToggled={this.handleFlipToggled}
-                />
+                {doubleSided ? (
+                    <DirectionCard
+                        {...this.props}
+                        isTruth={this.state.isTruth}
+                        flip={true}
+                        onFlipToggled={this.handleFlipToggled}
+                    />
+                ) : (
+                    ''
+                )}
                 <DirectionCard
                     {...this.props}
                     isTruth={this.state.isTruth}
@@ -70,7 +80,8 @@ class QuestionCard extends Component {
 }
 
 QuestionCard.propTypes = {
-    question: PropTypes.object.isRequired
+    question: PropTypes.object.isRequired,
+    doubleSided: PropTypes.bool
 };
 
 DirectionCard.propTypes = {

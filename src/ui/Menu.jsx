@@ -33,6 +33,7 @@ class Menu extends Component {
         this.handleFileUpload = this.handleFileUpload.bind(this);
         this.saveQuestions = this.saveQuestions.bind(this);
         this.clearQuestions = this.clearQuestions.bind(this);
+        this.handleSwitch = this.handleSwitch.bind(this);
     }
 
     setDrawer(open) {
@@ -57,7 +58,9 @@ class Menu extends Component {
     }
 
     handleSwitch = name => event => {
-        this.setState({ [name]: event.target.checked });
+        const { checked } = event.target;
+        this.setState({ [name]: checked });
+        this.props.setDoubleSided(checked);
     };
 
     saveQuestions() {
@@ -225,7 +228,8 @@ Menu.propTypes = {
     questions: PropTypes.object,
     handleFileUpload: PropTypes.func.isRequired,
     clearQuestions: PropTypes.func,
-    location: PropTypes.object
+    location: PropTypes.object,
+    setDoubleSided: PropTypes.func
 };
 
 export default Menu;

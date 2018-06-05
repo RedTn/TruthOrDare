@@ -31,9 +31,13 @@ export const dares = (state = [], action) => {
     }
 };
 
+export const doubleSided = (state = true, action) =>
+    action.type === C.SET_DOUBLE_SIDED ? action.payload : state;
+
 export default combineReducers({
     questions: combineReducers({
         truths,
         dares
-    })
+    }),
+    doubleSided
 });

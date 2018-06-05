@@ -7,7 +7,8 @@ const constants = {
     IMPORT_TRUTHS: 'IMPORT_TRUTHS',
     IMPORT_DARES: 'IMPORT_DARES',
     CLEAR_TRUTHS: 'CLEAR_TRUTHS',
-    CLEAR_DARES: 'CLEAR_DARES'
+    CLEAR_DARES: 'CLEAR_DARES',
+    SET_DOUBLE_SIDED: 'SET_DOUBLE_SIDED'
 };
 
 export default constants;

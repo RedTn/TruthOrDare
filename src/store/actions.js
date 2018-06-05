@@ -60,3 +60,10 @@ export const clearDares = () => {
         type: C.CLEAR_DARES
     };
 };
+
+export const setDoubleSided = data => {
+    return {
+        type: C.SET_DOUBLE_SIDED,
+        payload: data
+    };
+};
