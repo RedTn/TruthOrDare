@@ -19,6 +19,11 @@
     "slick-carousel": "^1.8.1",
     "uuid": "^3.2.1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
@@ -31,8 +36,7 @@
     "eject": "react-scripts eject",
     "prettier": "prettier --single-quote --tab-width 4 --print-width 100 --write \"src/**/*.{jsx,js}\"",
     "lint": "eslint src/**/*.{jsx,js}",
-    "lint-fix": "eslint --fix src/**/*.{jsx,js}",
-    "precommit": "lint-staged"
+    "lint-fix": "eslint --fix src/**/*.{jsx,js}"
   },
   "lint-staged": {
     "src/**/*.{jsx,js}": [
@@ -44,7 +48,7 @@
   "devDependencies": {
     "eslint": "^5.0.1",
     "eslint-plugin-react": "^7.10.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0-rc.12",
     "lint-staged": "^7.1.2",
     "node-sass-chokidar": "^1.3.0",
     "prettier": "^1.13.2"
