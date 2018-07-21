@@ -73,10 +73,12 @@ class AddQuestionsForm extends Component {
     };
 
     handleSubmit(e) {
-        if (this.state.truth && typeof this.state.truth === 'string')
+        if (this.state.truth && typeof this.state.truth === 'string') {
             this.props.addTruth(this.state.truth);
-        if (this.state.dare && typeof this.state.dare === 'string')
+        }
+        if (this.state.dare && typeof this.state.dare === 'string') {
             this.props.addDare(this.state.dare);
+        }
         this.setState({
             truth: '',
             dare: ''
