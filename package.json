@@ -46,7 +46,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^5.6.1",
+    "eslint": "5.15.3",
     "eslint-config-redtn-react": "^0.1.2",
     "eslint-plugin-react": "^7.10.0",
     "husky": "^1.0.0-rc.12",
