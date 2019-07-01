@@ -50,7 +50,7 @@
     "eslint-config-redtn-react": "^0.1.2",
     "eslint-plugin-react": "^7.14.2",
     "husky": "^2.2.0",
-    "lint-staged": "^8.1.7",
+    "lint-staged": "^9.0.0",
     "node-sass-chokidar": "^1.3.0",
     "prettier": "^1.18.2"
   },
