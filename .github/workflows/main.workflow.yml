@@ -25,10 +25,10 @@ jobs:
         run: yarn install
       - name: Lint
         run: yarn lint
-      - name: Test
-        run: yarn test-ci
       - name: Build
         run: yarn build
+      - name: Test
+        run: yarn test-ci
       - name: Deploy
         if: github.ref == 'refs/heads/master'
         run: yarn surge --project ./build --domain truthordare.surge.sh --token ${{ secrets.SURGE_TOKEN }}
