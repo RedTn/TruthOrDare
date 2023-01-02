@@ -52,7 +52,7 @@
   "devDependencies": {
     "eslint": "^5.6.1",
     "eslint-config-redtn-react": "^0.1.2",
-    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react": "^7.31.11",
     "husky": "^3.0.0",
     "lint-staged": "^9.1.0",
     "node-sass-chokidar": "^2.0.0",
